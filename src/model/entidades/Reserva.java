@@ -40,9 +40,17 @@ public class Reserva {
 		
 	}
 	
-	public void atualizacao (Date entrada, Date saida) {
+	public String atualizacao (Date entrada, Date saida) {
+		Date now = new Date();
+		if (entrada.before(now) || saida.before(now)) {
+			return "Reservation data for update must be future dates.";
+		} 
+		if (!saida.after(entrada)) {
+			return "Check-out date must be after check-in date.";
+		} 
 		this.entrada = entrada;
 		this.saida = saida;
+		return null;
 	}
 	
 	@Override 
